@@ -15,6 +15,7 @@ module.exports = {
     rules: {
         semi: [2, "always"],
         indent: [0, 4],
+        "react/display-name": "off",
         "space-before-function-paren": [
             "error",
             { anonymous: "always", named: "never" }

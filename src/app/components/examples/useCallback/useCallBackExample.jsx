@@ -11,7 +11,7 @@ const UseCallBackExample = () => {
     // Without useCallback
     const withoutCallback = useRef(0);
     const validateWithoutCallback = (data) => {
-        console.log(data);
+        // console.log(data);
     };
     useEffect(() => {
         withoutCallback.current++;
@@ -20,7 +20,7 @@ const UseCallBackExample = () => {
     // With useCallback
     const withCallback = useRef(0);
     const validateWithCallback = useCallback((data) => {
-        console.log(data);
+        // console.log(data);
     }, []);
     useEffect(() => {
         withCallback.current++;
