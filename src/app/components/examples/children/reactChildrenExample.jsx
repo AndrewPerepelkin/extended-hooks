@@ -23,7 +23,7 @@ const FormComponent = ({ children }) => {
     });
 };
 
-FormComponent.protoTypes = {
+FormComponent.propTypes = {
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
