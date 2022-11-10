@@ -1,5 +1,53 @@
 import React from "react";
 import CollapseWrapper from "../common/collapse";
+import PropTypes from "prop-types";
+import CardWrapper from "../common/Card";
+import Divider from "../common/divider";
+
+const SimpleComponent = ({ onLogin, onLogOut, isAuth }) => {
+    return (
+        <>
+            {isAuth ? (
+                <button className="btn btn-danger" onClick={onLogOut}>
+                    Выйти
+                </button>
+            ) : (
+                <button className="btn btn-primary" onClick={onLogin}>
+                    Войти
+                </button>
+            )}
+        </>
+    );
+};
+
+SimpleComponent.propTypes = {
+    onLogin: PropTypes.func,
+    onLogOut: PropTypes.func,
+    isAuth: PropTypes.bool
+};
+
+const withFunctions = (Component) => (props) => {
+    const isAuth = localStorage.getItem("auth");
+    const onLogin = () => {
+        localStorage.setItem("auth", "token");
+    };
+    const onLogOut = () => {
+        localStorage.removeItem("auth");
+    };
+
+    return (
+        <CardWrapper>
+            <Component
+                {...props}
+                isAuth={isAuth}
+                onLogin={onLogin}
+                onLogOut={onLogOut}
+            />
+        </CardWrapper>
+    );
+};
+
+const ComponentWithHoc = withFunctions(SimpleComponent);
 
 const HocExercise = () => {
     return (
@@ -76,6 +124,8 @@ const HocExercise = () => {
                 <code>SimpleComponent</code> обновится после перезагрузки
                 страницы
             </p>
+            <Divider />
+            <ComponentWithHoc />
         </CollapseWrapper>
     );
 };
