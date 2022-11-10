@@ -1,5 +1,20 @@
 import React from "react";
 import CollapseWrapper from "../common/collapse";
+import PropTypes from "prop-types";
+
+const ListComponent = ({ children }) => {
+    return React.Children.map(children, (child, index) => {
+        return React.cloneElement(child, { index: index + 1 });
+    });
+};
+
+ListComponent.propTypes = {
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
+};
+
 const ChildrenExercise = () => {
     return (
         <CollapseWrapper title="Упражнение">
@@ -10,16 +25,21 @@ const ChildrenExercise = () => {
                 <code>React.Children.map</code> так и{" "}
                 <code>React.Children.toArray</code>
             </p>
-
-            <Component />
-            <Component />
-            <Component />
+            <ListComponent>
+                <Component />
+                <Component />
+                <Component />
+            </ListComponent>
         </CollapseWrapper>
     );
 };
 
-const Component = () => {
-    return <div>Компонент списка</div>;
+const Component = ({ index }) => {
+    return <div>{index}. Компонент списка</div>;
+};
+
+Component.propTypes = {
+    index: PropTypes.number
 };
 
 export default ChildrenExercise;
