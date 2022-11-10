@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const LogOutButton = ({ onLogOut }) => {
     useEffect(() => {
-        console.log("render button");
+        // console.log("render button");
     });
 
     return (
